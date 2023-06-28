@@ -4,10 +4,13 @@
 static int topbar = 1;                      /* -b  option; if 0, dmenu appears at bottom     */
 
 /* -fn option overrides fonts[0]; default X11 font or font set */
-static char font[] = "monospace:size=10";
+static char font[] = "monospace:size=15";
+static char fonta[] = "monospace:size=15";
+static char fontb[] = "monospace:size=15";
 static const char *fonts[] = {
 	font,
-	"NotoColorEmoji:pixelsize=15:antialias=true:autohint=true"
+	fonta,
+	fontb
 };
 
 static char *prompt      = NULL;      /* -p  option; prompt to the left of input field */
@@ -36,6 +39,8 @@ static const char worddelimiters[] = " ";
  */
 ResourcePref resources[] = {
 	{ "font",        STRING, &font },
+	{ "fonta",       STRING, &fonta },
+	{ "fontb",       STRING, &fontb },
 	{ "normfgcolor", STRING, &normfgcolor },
 	{ "normbgcolor", STRING, &normbgcolor },
 	{ "selfgcolor",  STRING, &selfgcolor },
