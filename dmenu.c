@@ -27,7 +27,7 @@
 #define TEXTW(X)              (drw_fontset_getwidth(drw, (X)) + lrpad)
 
 /* enums */
-enum { SchemeNorm, SchemeSel, SchemeOut, SchemeLast }; /* color schemes */
+enum { SchemeNorm, SchemeSel, SchemeOut, SchemeCursor, SchemeLast }; /* color schemes */
 
 struct item {
 	char *text;
@@ -180,8 +180,13 @@ drawmenu(void)
 
 	curpos = TEXTW(text) - TEXTW(&text[cursor]);
 	if ((curpos += lrpad / 2 - 1) < w) {
-		drw_setscheme(drw, scheme[SchemeNorm]);
-		drw_rect(drw, x + curpos, 2, 2, bh - 4, 1, 0);
+		/* drw_setscheme(drw, scheme[SchemeNorm]); */
+		/* drw_rect(drw, x + curpos, 2, lrpad / 2, bh - 4, 1, 0); */
+		if (text[0] != '\0') {
+			drw_setscheme(drw, scheme[SchemeCursor]);
+			char vi_char[] = {text[cursor], '\0'};
+			drw_text(drw, x + curpos, 0, TEXTW(vi_char) - lrpad, bh, 0, vi_char, 0);
+		}
 	}
 
 	if (lines > 0) {
